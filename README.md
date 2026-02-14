@@ -5,5 +5,6 @@ Fetches 50 books from OpenLibrary API, filters books published after 2000, and s
 ## Run
 
 ```bash
-pip install requests
+pip install -r requirements.txt
 python main.py
+```

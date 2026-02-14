@@ -1,4 +1,5 @@
 import requests
+import csv
 
 
 def fetch_book():
@@ -21,3 +22,10 @@ def filter_book(books):
                 }
             )
     return filtered_books
+
+
+def save_to_csv(books, filename="books.csv"):
+    with open(filename, mode="w", newline="") as f:
+        writer = csv.DictWriter(f, filenames=["title", "author", "year"])
+        writer.writeheader()
+        writer.writerow(books)

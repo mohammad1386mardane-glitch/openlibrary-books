@@ -5,8 +5,12 @@ import csv
 def fetch_book():
     API_URL = "https://openlibrary.org/search.json"
     params = {"q": "programing", "limit": 50}
-    response = requests.get(API_URL, params=params)
-    return response.json().get("docs", [])
+    try:
+        response = requests.get(API_URL, params=params)
+        return response.json().get("docs", [])
+    except Exception as e:
+        print(f"Error: {e}")
+        exit()
 
 
 def filter_book(books):
@@ -26,9 +30,9 @@ def filter_book(books):
 
 def save_to_csv(books, filename="books.csv"):
     with open(filename, mode="w", newline="") as f:
-        writer = csv.DictWriter(f, filenames=["title", "author", "year"])
+        writer = csv.DictWriter(f, fieldnames=["title", "author", "year"])
         writer.writeheader()
-        writer.writerow(books)
+        writer.writerows(books)
 
 
 books = fetch_book()

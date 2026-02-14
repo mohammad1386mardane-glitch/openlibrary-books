@@ -29,3 +29,9 @@ def save_to_csv(books, filename="books.csv"):
         writer = csv.DictWriter(f, filenames=["title", "author", "year"])
         writer.writeheader()
         writer.writerow(books)
+
+
+books = fetch_book()
+filtered_books = filter_book(books)
+save_to_csv(filtered_books)
+print("books saved succesfully")
